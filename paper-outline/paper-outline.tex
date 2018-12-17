@@ -1,0 +1,95 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[colorlinks=true, urlcolor = red, citecolor=blue]{hyperref}
+
+\newcommand{\bd}[1]{\boldsymbol{#1}}
+\newcommand{\Hel}{\hat{H}_{el}}
+\newcommand{\R}{\mathbb{R}}
+
+\begin{document}
+
+\title{PS 10: Final Project -- Paper Outline \\ Automated Computational Methods for Solving the Molecular Schr\"odinger Equation}
+\author{Alexander Lin \\ Supervised by Dr. Michael Mavros}
+
+\maketitle
+
+\section{Main Concept} 
+In the world of chemistry, we are greatly interested in the ability to accurately solve the Schr\"odinger equation.  For molecular structures, solutions to the Schr\"odinger equation allow us to characterize many interesting properties, such as atomization energies, bond lengths, and oscillation frequencies, to name a few.  
+
+However, since there do not exist exact, analytical solutions to many-body electron systems, the scientific community has resorted to computational approaches to make numerical approximations.  One of the most famous Schr\"odinger solvers that has been used throughout history is the Hartree-Fock algorithm \cite{szabo2012}.  By using a series of approximations -- such as Born-Oppenheimer, the single Slater Determinant, and the variational method -- Hartree-Fock allows us to compute an \emph{upperbound} to the true ground state energy $E$ of any given molecule, using nothing but the Cartesian coordinates of its constituent atoms.  
+
+In this project, we plan to automate the implementation of Hartree-Fock for a large dataset of molecules.  Specifically, we wish to investigate the efficacy of Hartree-Fock in solving the Schr\"odinger equation for the GDB-13 dataset, an exhaustive enumeration of over 970 million small, organic, and druglike molecules containing up to 13 atoms of cabon, nitrogen, oxygen, sulfur, and chlorine that are saturated with hydrogens \cite{blum2009}.  We will focus on a subset of this dataset, namely \href{http://quantum-machine.org/datasets/}{QM7b}, which was created to reduce the original dataset to a more manageable 7211 structures, while attempting to maintain the rich diversity of GDB-13 \cite{montavon2013}.  
+
+Specifically, we wish to explore questions surrounding the efficiency of Hartree-Fock on this dataset.  These include characterizing how long it takes for the algorithm to run, how this quantity varies across different molecules in the dataset, if there exists a relationship between the algorithm's efficiency and the molecule's length or its specific constituent atoms, etc.  QM7b also provides atomization energies values that are essentially exact \cite{montavon2013}, so it would be nice to use these in benchmarking the accuracy of Hartree-Fock's approximation.  Given more time, we could also benchmark its performance on other properties that are provided in QM7b, such as polarizability, HOMO and LUMO eigenvalues, and excitation energies.  All of these results will be displayed in the form of figures for the final paper.  
+
+Finally, there has been a recent interest in using machine learning methods as an alternative for more traditional, physics-based approaches in approximating solutions to the Schr\"odinger equation.  It would be interesting to compare accuracy and efficiency of Hartree-Fock against existing machine learning algorithms that have been used for this dataset.  These include kernel ridge regression \cite{rupp2012} and the multilayer perceptron \cite{montavon2012, montavon2013}.  The code for these algorithms are freely available \href{http://quantum-machine.org/}{http://quantum-machine.org/}.    Given more time, we could also develop our own machine learning algorithms for additional comparison.  In summary, it would be interesting to observe if machine learning can perform better than classical methods, or if it is really not necessary for these types of problems.
+
+\section{Implementation of Hartree-Fock}
+We will implement Hartree-Fock using the \href{https://www.python.org/}{Python} programming language to automatically calculate molecular ground-state energies and other quantities of interest, such as atomization energies.  Notation and methods are mainly  adapted from \cite{szabo2012} and \cite{sherrill2001}, the latter of which has an excellent set of resources at \href{http://vergil.chemistry.gatech.edu/notes/}{{http://vergil.chemistry.gatech.edu/notes/}}.
+
+Let a molecule be comprised of $m$ atoms and have $n$ electrons.  Given an $m$-by-$3$ matrix of atomic coordinates $\bd R$, Hartree-Fock approximately solves the multi-electron Schr\"odinger equation
+\begin{align*}
+\Hel(\bd{r}; \bd{R}) \Psi(\bd{r}; \bd{R}) = E_{el}(\bd R) \Psi(\bd r ; \bd R)
+\end{align*}    
+for the wavefunction $\Psi(\bd r)$ over $n$ electron coordinates $\bd r$ and the energy $E_{el}$.  Taking the Born-Oppenheimer approximation, we can write the Hamiltonian operator as 
+\begin{align*}
+\Hel = \sum_{i=1}^n \hat{h}(i) + \sum_{i=1}^n \sum_{j=i+1}^n \hat{v}(i, j) + \hat{V}_{NN}
+\end{align*} 
+where $\hat{h}(i) = -1/2 \cdot \nabla_i^2 - \sum_{a=1}^{m} Z_a / r_{ia}$ characterizes an electron's kinetic energy and its attraction to all nuclei, $\hat{v}(i, j) = 1 / r_{ij}$ characterizes repulsion between two electrons, and $\hat{V}_{NN}$ characterizes all nucleus-nucleus repulsions.  In general, we use the notation $r_{\alpha \beta}$ to denote the Euclidean distance between two entities -- either electrons or nuclei -- indexed by $\alpha$ and $\beta$, respectively.  
+
+We additionally assume that $\Psi$ is an anti-symmetric product-sum of single-electron, molecular wavefunctions $\chi_1, \ldots, \chi_n$ over coordinates $\bd x_1, \ldots, \bd x_n$ corresponding to the rows of matrix $\bd r$.  This is known as the Slater Determinant, or
+\begin{align*}
+\Psi = \frac{1}{\sqrt{n!}} 
+\begin{vmatrix}
+\chi_1(\bd x_1) & \chi_2(\bd x_1)  & \cdots & \chi_n(\bd x_1) \\
+\chi_1(\bd x_2) & \chi_2(\bd x_2)  & \cdots & \chi_n(\bd x_2) \\
+\vdots & \vdots & \ddots & \vdots \\
+\chi_1(\bd x_n) & \chi_2(\bd x_n) & \cdots & \chi_n(\bd x_n) 
+\end{vmatrix}
+\end{align*} 
+
+In finding the ground-state energy of a molecule, the goal of Hartree-Fock is to solve the following optimization problem, 
+\begin{align*}
+E_{HF} = \min_{\Psi} E_{el} = \min_{\Psi} \langle \Psi | \Hel | \Psi \rangle = \min_{\chi_1, \ldots, \chi_n} \sum_{i=1}^n \langle i | \hat{h} | i \rangle + \sum_{i=1}^n \sum_{j=i+1}^n [ i i | \hat{v} | jj] - [ij | \hat{v} | ji]
+\end{align*}
+where
+\begin{align*}
+\langle i | \hat{h} | i \rangle &= \int_\R \chi_i^*(\bd x) \hat{h}(i) \chi_i (\bd x) d \bd x \\
+[ii | \hat{v} | jj] &= \int_{\R^2} \chi_i^*(\bd x_1) \chi_i(\bd x_1) \hat{v} \chi_j^*(\bd x_2) \chi_j(\bd x_2) d\bd x_1 \bd x_2 \\
+[ij | \hat{v} | ji] &= \int_{\R^2} \chi_i^*(\bd x_1) \chi_j(\bd x_1) \hat{v} \chi_j^*(\bd x_2) \chi_i(\bd x_2) d\bd x_1 \bd x_2
+\end{align*}
+
+These integrals are analytically intractable, so we use the variational method.  Specific, we use linear combinations of Gaussian basis sets to approximate atomic orbitals that themselves form linear combinations of these molecular orbitals.  Originally developed by \cite{feller1996} and compiled by \cite{schuchardt2007}, we consult \href{https://bse.pnl.gov/bse/portal}{https://bse.pnl.gov/bse/portal} for a list of basis approximations.  Eventually, the algorithm boils down to the Hartree-Fock-Roothan equations \cite{szabo2012}, which iteratively solves pseudo-eigenvalue problems to determine the ground-state energy of a molecule.  
+
+I plan on heavily utilizing the numerical computing packages \href{http://www.numpy.org/}{NumPy} and \href{https://www.scipy.org/}{SciPy} in my implementation of Hartree-Fock.  
+
+\section{Paper Outline}
+Here is a brief outline of the paper.
+\begin{enumerate}
+\item MOTIVATION - explain why Hartree-Fock is important, what quantities we can calculate by solving the Schr\"odinger equation
+\item THEORY - explain the mathematics behind the algorithm
+\begin{itemize}
+\item Approximations taken by Hartree-Fock - i.e. Born-Oppenheimer, Slater, variational method
+\item Spin integration in exchange integrals
+\item  Hartree-Fock-Roothan equations and self-consistent field procedure
+\end{itemize}
+\item IMPLEMENTATION - explain the process of coding the algorithm
+\begin{itemize}
+\item Packages utilized for numerical computations
+\item Specific basis sets employed by our implementation
+\item Hyperparameters of the algorithm - e.g. tolerance of self-consistent field procedure, number of iterations, etc. 
+\end{itemize}
+\item RESULTS - show the utility of the algorithm
+\begin{itemize}
+\item Efficiency results - how long does it take to find the ground-state energy of molecules; are there certain molecules that take longer than others
+\item Accuracy results - how accurate is the algorithm at computing atomization energies; are there certain molecules that are more accurate than others
+\item (\emph{Optional.}) Comparison with machine learning approaches
+\end{itemize}
+\end{enumerate}
+
+\bibliographystyle{plain}
+\bibliography{sources}
+
+\end{document}

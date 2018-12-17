@@ -1,0 +1,179 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{algorithmicx}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage[colorlinks=true, urlcolor = red, citecolor=blue, linkcolor=magenta]{hyperref}
+
+\newcommand{\vect}[1]{\boldsymbol{#1}}
+\newcommand{\Hel}{\hat{H}_{el}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Oh}{\mathcal{O}}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+
+\begin{document}
+
+\title{{\Large PS 10: Final Project -- Final Paper} \\ Automated Computation Of Molecular Properties \\ From First Principles}
+\author{Alexander Lin \\ Supervised by Dr. Michael Mavros}
+
+\maketitle
+
+\section{Introduction}
+
+In the world of chemistry, we are greatly interested in the ability to accurately solve the Schr\"odinger equation.  For molecular structures, solutions to the Schr\"odinger equation allow us to characterize many interesting properties, such as total energies, ionization potentials, and interatomic bond lengths, to name a few. 
+
+However, since there do not exist exact, analytical solutions to many-body electron systems, the scientific community has resorted to computational approaches that make numerical approximations.  One of the most famous Schr\"odinger solvers that has been used throughout history is the Hartree-Fock algorithm \cite{szabo2012}.  By using a series of approximating methods -- such as Born-Oppenheimer, the single Slater Determinant, and the variational method -- Hartree-Fock allows us to compute an \emph{upperbound} to the true ground state energy $E$ of any given molecule, using nothing but the Cartesian coordinates and nuclear charges of its constituent atoms.   
+
+In this project, we automate the implementation of Hartree-Fock for small molecules and derive interesting, experimentally-verified properties from first principles.  We begin by testing Hartree-Fock's ability to recover bond lengths of very simple inorganic molecules such as hydrogen fluoride and nitrogen gas.  Next, we evaluate how well the algorithm is able to calculate the total energy of various multi-electron atoms.  
+
+Finally, we investigate the efficacy of Hartree-Fock in solving the Schr\"odinger equation for the GDB-13 dataset, an exhaustive enumeration of over 970 million organic and druglike molecules containing up to 13 atoms of cabon, nitrogen, oxygen, sulfur, and chlorine that are saturated with hydrogens \cite{blum2009}.  We focus on a subset of this dataset -- namely 59 small molecules with up to four non-hydrogen atoms from QM7b\footnote{Freely available at \url{http://quantum-machine.org/datasets/}.}, which was created to reduce the original dataset to a more manageable number of structures while maintaining the rich diversity of GDB-13 \cite{montavon2013}.  For each organic molecule, we compare a Hartree-Fock calculation of its total energy and first ionization potential to ground-truth values.  We also analyze trends within specific organic families such as alkanes and alkynes to show that Hartree-Fock can successfully recover these trends.  We conclude the analysis with experimental evidence that the asymptotic running time of Hartree-Fock is $\Oh(n^4)$, where $n$ is the number of orbitals considered by the algorithm for a given molecule.
+
+The rest of this paper is organized as follows: Section 2 explains the mathematical theory behind the Hartree-Fock algorithm.  Section 3 details the process of implementing the algorithm, along with some technical specifications.  Section 4 presents the main results, thereby providing some evidence of the algorithm's utility.  And finally, Section 5 concludes the paper and touches on some potential future work.  
+
+\section{Theory}
+
+In this section, we heavily utilize the notation of \cite{sherrill2001} and \cite{szabo2012}.  We highly recommend interested readers to consult either of these comprehensive sources for additional information about Hartree-Fock theory.
+
+\subsection{Initial Approximations}
+
+Let us start with the Hamiltonian $\hat{H}$ and corresponding ground-state energy $E_{tot}$ for a multi-electron system.  The Hamiltonian can be characterized by five main components,
+\begin{align}
+\hat{H} = \hat{T}_N(\vect{R}) + \hat{T}_e(\vect{r}) + \hat{V}_{NN}(\vect{R}, \vect{Z}) + \hat{V}_{eN}(\vect{r}, \vect{R}, \vect{Z}) + \hat{V}_{ee}(\vect{r}),
+\end{align}
+where $\hat{T}_N, \hat{T}_e$ respectively describe the kinetic energies of the nuclei and electrons; and $\hat{V}_{NN}, \hat{V}_{eN}, \hat{V}_{ee}$ respectively describe the Coulombic potential energies of nucleus-nucleus repulsion, electron-nucleus attraction, and electron-electron attraction.  Here, $\vect{R} = \{\vect{R}_1, \ldots, \vect{R}_M\}$ and $\vect{r} = \{\vect{r}_1, \ldots, \vect{r}_N\}$ are matrices that hold three-dimensional coordinates for the $M$ nuclei and $N$ electrons of the molecule in question.  The vector $\vect{Z} = \{Z_1, \ldots, Z_M\}$ denotes the charges for the $M$ nuclei.  Note that $\vect{R}, \vect{Z}$ are inputs to the algorithm, whereas $\vect{r}$ is characterized by the wavefunction.  In general, we will use $\{i, j, k\}$ to index electrons and $\{A, B, C\}$ to index nuclei.     
+
+The first approximation taken by Hartree-Fock is Born-Oppenheimer, which drops $\hat{T}_N$ from the Hamiltonian.  The other four terms can be expanded as,
+\begin{align}
+\hat{T}_e(\vect{r}) &= -\frac{1}{2} \sum_{i=1}^N \nabla_i^2 \label{t_e} , \\
+\hat{V}_{NN}(\vect{R}, \vect{Z}) &= \sum_{A=1}^M \sum_{B > A}^M \frac{Z_A Z_B}{R_{AB}} \label{v_nn},\\
+\hat{V}_{eN}(\vect{r}, \vect{R}, \vect{Z}) &=  - \sum_{A=1}^M \sum_{i=1}^N \frac{Z_{A}}{r_{Ai}} \label{v_en}, \\
+\hat{V}_{ee}(\vect{r}) &= \sum_{i=1}^N \sum_{j > i}^N \frac{1}{r_{ij}} \label{v_ee}, 
+\end{align}      
+where $R_{AB} = \norm{\vect{R}_B - \vect{R}_A}_2$ is an internuclear distance, $r_{ij} = \norm{\vect{r}_j - \vect{r}_i}_2$ is an electron-electron distance, and $r_{Ai} = \norm{\vect{r}_i - \vect{r}_A}_2$ is an nucleus-electron distance.  One immediate observation from Equation \ref{v_nn} is that the operator $\hat{V}_{NN}$ has no dependence on electron coordinates $\vect{r}$; therefore, we can simply calculate this quantity at the beginning of the algorithm and leave it to the side.  It follows that the electronic Schr\"odinger equation may be simplified as 
+\begin{align}
+\hat{H}_{ele} \Psi(\vect{r}; \vect{R}, \vect{Z}) = \left[ \hat{T}_e(\vect{r}) + \hat{V}_{eN}(\vect{r}, \vect{R}, \vect{Z}) + \hat{V}_{ee}(\vect{r}) \right] \Psi(\vect{r}; \vect{R}, \vect{Z})= E_{ele} \Psi(\vect{r}; \vect{R}, \vect{Z}) \label{H_ele},
+\end{align}
+where the total energy of the multi-electron system $E_{tot} = E_{ele} + V_{NN}$ is the sum of the electronic and nuclear energies.
+
+The antisymmetry principle states that for a system of fermions, the wavefunction must be antisymmetric with respect to changes in position \emph{and} spin of any two fermions \cite{sherrill2001}.  To satisfy this principle, we must introduce a new variable (i.e. the spin coordinate $\omega$) for each electron and define the wavefunction $\Psi$ in terms of $\vect{x} = \{\vect{x}_1, \ldots, \vect{x}_N\}$, where each $\vect{x}_i = \{\vect{r}_i, \omega_i\}$.  The following equation describes antisymmetry for any two electrons $i, j$,  
+\begin{align}
+\Psi(\vect{x}_1, \ldots, \vect{x}_i, \ldots, \vect{x}_j, \ldots, \vect{x}_N) = -\Psi(\vect{x}_1, \ldots, \vect{x}_j, \ldots, \vect{x}_i, \ldots, \vect{x}_N). \label{antisymm}
+\end{align}  
+
+We would like to express $\Psi$ as some aggregated function of single-electron, molecular wavefunctions $\chi_1, \ldots, \chi_n$ to make calculations easier.  Perhaps the most straightforward way to do this while satisfying Equation \ref{antisymm}  -- and its immediate corollary, the Pauli exclusion principle -- is to let $\Psi$ be a Slater determinant,
+\begin{align}
+\Psi = \frac{1}{\sqrt{n!}} 
+\begin{vmatrix}
+\chi_1(\vect x_1) & \chi_2(\vect x_1)  & \cdots & \chi_N(\vect x_1) \\
+\chi_1(\vect x_2) & \chi_2(\vect x_2)  & \cdots & \chi_N(\vect x_2) \\
+\vdots & \vdots & \ddots & \vdots \\
+\chi_1(\vect x_N) & \chi_2(\vect x_N) & \cdots & \chi_N(\vect x_N) 
+\end{vmatrix}.
+\end{align} 
+That is, we assume $\Psi$ to be an anti-symmetric product-sum.  It is this assumption that makes Hartree-Fock a \emph{mean field approximation}, which means that each electron feels the average repulsive cloud of other electrons, but not the individual effects.  For this reason, the Hartree-Fock model fails to capture certain real-world phenomena, such as London dispersion, that occur between specific sets of electrons.  There exists an entire body of literature on post-Hartree-Fock methods for improving this approximation \cite{bartlett1994applications}.       
+
+\subsection{Hartree-Fock Energy}
+Following Sherrill's notation \cite{sherrill2001}, we can compactly re-express Equations \ref{t_e} and \ref{v_en} as a one-electron operator $\hat{h}$,
+\begin{align}
+\hat{T}_e(\vect{r}) + \hat{V}_{eN}(\vect{r}, \vect{R}, \vect{Z})  = \sum_{i} \left(-\frac{1}{2} \nabla_i^2 - \sum_A \frac{Z_A}{r_{iA}}\right) = \sum_{i} \hat{h}(i) ,
+\end{align}
+and Equation \ref{v_ee} as a two-electron operator $\hat{v}$,
+\begin{align}
+\hat{V}_{ee}(\vect{r}) = \sum_{i < j} \hat{v}(i, j) = \sum_{i < j} \frac{1}{r_{ij}}.
+\end{align}
+It follows that we can simply re-write the electronic Hamiltonian of Equation \ref{H_ele} as 
+\begin{align}
+\hat{H}_{ele}  = \sum_i \hat{h}(i) + \sum_{i < j}\hat{v}(i, j).
+\end{align}
+
+In finding the ground-state energy of a molecule, the goal of Hartree-Fock is to solve the following optimization problem, 
+\begin{align}
+E_{HF} = \min_{\Psi} E_{ele} = \min_{\Psi} \langle \Psi | \Hel | \Psi \rangle = \min_{\chi_1, \ldots, \chi_N} \sum_{i=1}^n \langle i | \hat{h} | i \rangle + \sum_{i=1}^n \sum_{j=i+1}^n [ i i | jj] - [ij | ji], 
+\end{align}
+where
+\begin{align}
+\langle i | \hat{h} | i \rangle &= \int_\R \chi_i^*(\vect x) \hat{h}(i) \chi_i (\vect x) d \vect x, \\
+[ii | jj] &= \int_{\R^2} \chi_i^*(\vect x_1) \chi_i(\vect x_1) \hat{v}(i, j) \chi_j^*(\vect x_2) \chi_j(\vect x_2) d\vect x_1 \vect x_2, \\
+[ij | ji] &= \int_{\R^2} \chi_i^*(\vect x_1) \chi_j(\vect x_1) \hat{v}(i, j) \chi_j^*(\vect x_2) \chi_i(\vect x_2) d\vect x_1 \vect x_2.
+\end{align}
+
+Working through Lagrange's method of undetermined multipliers for this optimization, as detailed in \cite{sherrill2000introduction}, we arrive at the eigenvalue problem,
+\begin{align}
+f(\vect{x}_1)\chi_i (\vect{x}_1) = \epsilon_i \chi_i(\vect{x}_1) \label{hf-eq},
+\end{align}
+where the Fock operator $f$ is defined by 
+\begin{align}
+f(\vect{x}_1) \chi_i (\vect{x}_1) &= h(\vect{x}_1) \chi_i (\vect{x}_1) + \sum_{j \neq i} \left[ \int  | \chi_j(\vect{x}_2) |^2 \frac{1}{r_{12}} d \vect{x}_2 \right] \chi_i (\vect{x}_1) \nonumber \\
+&- \sum_{j \neq i} \left[ \int  \chi_j^* (\vect{x}_2) \chi_i(\vect{x}_2) \frac{1}{r_{12}} d \vect{x}_2 \right] \chi_j (\vect{x}_1),
+\end{align}
+and $\epsilon_i$ is the energy of molecular orbital $i$.  The operator involves the integration of complicated expressions, so to make things analytically tractable, we introduce a basis set of easy-to-integrate atomic orbitals $\tilde{\chi}_1, \ldots, \tilde{\chi}_K$.  Typically, $\tilde{\chi}_\mu$ is a linear combination of Gaussians whose coefficients have been optimized to fit Slater-type orbitals; we elaborate more on this in Section 3.  In doing so, we employ the variational principle -- another source of approximation.  
+
+We now have that each molecular orbital $i$ is a linear combination of atomic orbitals (i.e. MO-LCAO method) with coefficients $C_{1i}, \ldots, C_{Ki}$, 
+\begin{align}
+\chi_i = \sum_{\mu = 1}^K C_{\mu i} \tilde{\chi}_\mu. 
+\end{align}    
+
+From this, we can rewrite Equation \ref{hf-eq} as the Hartree-Fock-Roothan equations, 
+\begin{align}
+\sum_{\nu} F_{\mu \nu} C_{\nu i} = \epsilon_i \sum_{\nu} S_{\mu \nu} C_{\nu i},
+\end{align}
+where we have the more tractable integrals, 
+\begin{align}
+S_{\mu \nu} &= \int \tilde{\chi}_\mu^*(\vect{x}_1) \tilde{\chi}_\nu(\vect{x}_1) d \vect{x}_1 \label{overlap}, \\
+F_{\mu \nu} &= \int \tilde{\chi}_\mu^*(\vect{x}_1) f(\vect{x}_1) \tilde{\chi}_\nu(\vect{x}_1) d \vect{x}_1 \label{fock}.
+\end{align}
+
+In matrix form, this can be written as 
+\begin{align}
+\vect{F} \vect{C} = \vect{S} \vect{C} \vect{\epsilon} \label{hfr}
+\end{align}
+
+Equation \ref{hfr} is a peculiar eigenvalue equation, because $\vect{F}$ depends on $\vect{C}$ and vice-versa.  This means that both cannot be optimized simultaneously; instead, the Hartree-Fock algorithm must alternately update these two matrices until convergence.  
+
+\subsection{Hartree-Fock Algorithm}
+
+The Hartree-Fock algorithm \cite{szabo2012} can be divided into two main parts -- (1) integration and (2) iteration.  The integration part tends to dominate in terms of computation time.  
+
+During the integration part, there are four main integrals of interest that need to be pre-computed.  The first is the overlap integral $S_{\mu \nu}$ for every pair of atomic orbitals $\mu, \nu$, as described by Equation \ref{overlap}.  The other three -- kinetic energy $T_{\mu \nu}$, nuclear-electron attraction $V_{\mu \nu}^\text{nucl}$, and electron-electron repulsion $[\mu \nu | \lambda \sigma]$ -- are involved in the Fock integral of Equation \ref{fock}.  Their expressions come straight from the operators -- as defined by Equations \ref{t_e}, \ref{v_en}, and \ref{v_ee} -- applied to the atomic basis functions,
+\begin{align}
+T_{\mu \nu} &= \int \tilde{\chi}^*_\mu(\vect{x}_1) \left[-\frac{1}{2} \nabla_1^2\right] \tilde{\chi}_\nu (\vect{x}_1) d \vect{r}_1  \\
+V_{\mu \nu}^\text{nucl} &= \int \tilde{\chi}^*_\mu(\vect{x}_1) \left[ - \sum_{A} \frac{Z_A}{r_{A1}} \right] \tilde{\chi}_\nu(\vect{x}_1) d\vect{r}_1 \\
+[\mu \nu | \lambda \sigma]  &= \int \int \tilde{\chi}^*_\mu(\vect{x}_1) \tilde{\chi}_\nu(\vect{x}_1)  \frac{1}{\vect{r}_{12}} \tilde{\chi}^*_\lambda(\vect{x}_2) \tilde{\chi}_\sigma(\vect{x}_2) d \vect{r}_1 \vect{r}_2
+\end{align}
+
+After these integrals are computed, the algorithm proceeds by alternately changing $\vect{F}$ and $\vect{C}$.  A full description is given by \cite{szabo2012} and summarized in Algorithm \ref{alg}.  Note that this is the restricted Hartree-Fock procedure, which treats electrons as paired fermions and works for an even number of electrons.  
+
+\begin{algorithm}
+  \begin{algorithmic}[1]
+  \State{\textbf{Input:} nuclear coords $\vect{R}$, charges $\vect{Z}$, atomic basis functions $\tilde{\chi}_\mu$, num of electrons $N$}
+  \State{Compute nuclear-nuclear repulsion $V_{NN}$.}
+  \State{Compute integrals $S_{\mu \nu}$, $T_{\mu \nu}$, $V_{\mu \nu}^\text{nucl}$, $[\mu \nu | \lambda \sigma]$}.  
+  \State{Construct orthonormal basis transformation matrix $\vect{X}$ from $\vect{S}$ using canonical method.}
+  \State{Initialize density matrix $\vect{P} = \vect{0}$.}
+  \State{Initialize Fock matrix $F_{\mu \nu} = T_{\mu \nu} + V_{\mu \nu}^\text{nucl} $.}
+  \While{$\vect{P}$ has not converged}
+  \State{Calculate transformed Fock matrix $\vect{F}' = \vect{X}^T \vect{F} \vect{X}$.}
+  \State{Diagonalize $\vect{F'}$ to get eigenvectors $\vect{C'}$ and eigenvalues $\vect{\epsilon}$.}
+  \State{Calculate $\vect{C} = \vect{X} \vect{C'}$.}
+  \State{Compute density matrix $P_{\mu \nu} = 2 \sum_{i=1}^{N/2} C_{\mu i} C_{\nu i}$.}
+  \State{Compute matrix $G_{\mu \nu} = \sum_{\lambda, \sigma} P_{\lambda \sigma} \left(2 \cdot [\mu \nu | \sigma \lambda] - [\mu \lambda | \sigma \nu] \right)$.}
+  \State{Compute Fock matrix $F_{\mu \nu} = T_{\mu \nu} + V_{\mu \nu}^\text{nucl} + G_{\mu \nu}$.}
+  \State{Compute electronic energy $E_{ele} = \sum_{\mu, \nu} P_{\mu \nu}  \cdot (T_{\mu \nu} + V_{\mu \nu}^\text{nucl} + F_{\mu \nu})$.}
+  \EndWhile
+  \State{Compute total energy $E_{tot} = E_{ele} + V_{NN}$.} 
+  \State{\textbf{Output:} $E_{tot}, \vect{\epsilon}, \bold{F}, \bold{P}, \bold{T}, \bold{V}^\text{nucl}$}
+  \end{algorithmic}
+  \caption{Restricted Hartree-Fock} \label{alg}
+\end{algorithm}
+
+\section{Implementation}
+
+Our implementation of Hartree-Fock follows Algorithm \ref{alg}.  
+
+  
+\bibliographystyle{plain}
+\bibliography{sources}
+
+\end{document}

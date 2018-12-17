@@ -1,0 +1,47 @@
+\documentclass{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[round]{natbib}
+\usepackage{amsmath}
+
+
+\begin{document}
+
+\title{PS 10: Initial Final Project Proposal \\ Solving the Schr\"odinger Equation with Deep Learning}
+\author{Alex Lin}
+
+\maketitle
+
+\section*{Preface} 
+
+I would like to preface my proposal by saying that these initial thoughts for the final project are in no way final.  I realize that there may be many computational difficulties in this proposal (particularly with the computation of the baseline) and am eager to discuss ways to potentially modify my ideas with the teaching staff.
+
+\section*{Initial Proposal}
+
+It seems that in the world of quantum mechanics, solving the Schr\"odinger equation is a problem of utmost importance.  Specifically, finding the potential energy $E$ of a molecule allows us to characterize the molecule in a variety of ways.  However, finding an exact solution to the Schr\"odinger equation is known to be difficult, and that is why we resort to approximations such as Born-Oppenheimer.  
+
+However, Born-Oppenheimer makes assumptions that simplify calculations, but also have the potential to reduce the accuracy of the approximate solutions.  Therefore, to find approximate solutions to the Schr\"odinger equation in a potentially more successful way, I propose to use modern machine learning methods that have a proven track-record of excellence in solving regression problems.  
+
+Machine learning has enjoyed success in recent years in finding the atomization energy of molecules.  Rupp et al. (2012) first applied traditional statistical techniques to predicting the atomization energy of molecules in the QM7 dataset, which is comprised of 7000 small molecules of up to 23 atoms.  They achieve a mean absolute error (MAE) of close to ~10 kJ/mol.  Following them, Montavon et al. (2013) used a simple neural network approach to improve the MAE to ~3 kJ/mol on the same dataset.  Last year, Mills et al. (2017) established the first result of using a modern deep learning approach (i.e. convolutional neural networks) to solve the Schr\"odinger equation for sets of infinite well and simple harmonic oscillator potentials.  There seems to be quite a lot of hope for the usefulness of these methods.
+
+I propose to extend Montavon et al.'s work by looking at the same dataset and using a convolutional neural network (CNN) approach similar to that of Mills et. al.  Montavon et al. cite that an accuracy of ~1 kJ/mol is desirable for chemists.  I would like to try and see if this threshold is achievable with a more powerful method than the one they examined.  Since I already have access to the dataset, which is formatted nicely, and I have worked a lot with CNNs before, I am confident that I will be able to implement this result in Python.  
+
+However, I realize that I will need a baseline for comparison; in an effort to incorporate more methods that I learned in PS 10, I also propose to implement Hartree-Fock self consistent field (SCF) method as a baseline.  I hope to show that the CNN can produce approximates that are much better than Hartree-Fock SCF.  For every molecule, I have data on the nuclear charges of the constituent atoms and the Cartesian coordinates of these charges; I hope that this information will be enough to run the Hartree-Fock SCF algorithm.  The details of the Hartree-Fock SCF are not entirely clear to me, so I would like to discuss if its implementation would be possible with the course staff.  Any feedback would be appreciated!
+
+\begin{thebibliography}{16}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Mills et~al. (2017)]{mills}
+Mills, Kyle, Michael Spanner, and Isaac Tamblyn. "Deep learning and the Schrödinger equation." Physical Review A 96.4 (2017): 042113.
+
+\bibitem[Montavon (2012)]{montavon}
+Montavon, Grégoire, et al. "Learning invariant representations of molecules for atomization energy prediction." Advances in Neural Information Processing Systems. 2012.
+
+\bibitem[Rupp et~al.(2012)]{rupp}
+Rupp, Matthias, et al. "Fast and accurate modeling of molecular atomization energies with machine learning." Physical review letters 108.5 (2012): 058301.
+\end{thebibliography}
+
+\end{document}

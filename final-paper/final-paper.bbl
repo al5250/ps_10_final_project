@@ -1,0 +1,40 @@
+\begin{thebibliography}{1}
+
+\bibitem{bartlett1994applications}
+Rodney~J Bartlett and John~F Stanton.
+\newblock Applications of post-hartree—fock methods: A tutorial.
+\newblock {\em Reviews in computational chemistry}, pages 65--169, 1994.
+
+\bibitem{blum2009}
+Lorenz~C Blum and Jean-Louis Reymond.
+\newblock 970 million druglike small molecules for virtual screening in the
+  chemical universe database gdb-13.
+\newblock {\em Journal of the American Chemical Society}, 131(25):8732--8733,
+  2009.
+
+\bibitem{montavon2013}
+Gr{\'e}goire Montavon, Matthias Rupp, Vivekanand Gobre, Alvaro
+  Vazquez-Mayagoitia, Katja Hansen, Alexandre Tkatchenko, Klaus-Robert
+  M{\"u}ller, and O~Anatole Von~Lilienfeld.
+\newblock Machine learning of molecular electronic properties in chemical
+  compound space.
+\newblock {\em New Journal of Physics}, 15(9):095003, 2013.
+
+\bibitem{sherrill2000introduction}
+C~David Sherrill.
+\newblock An introduction to hartree-fock molecular orbital theory.
+\newblock {\em Georgia inst. of technology}, 2000.
+
+\bibitem{sherrill2001}
+C~David Sherrill.
+\newblock A brief review of elementary quantum chemistry.
+\newblock {\em Georgia Institute of Technology, School of Chemistry and
+  Biochemistry}, 2001.
+
+\bibitem{szabo2012}
+Attila Szabo and Neil~S Ostlund.
+\newblock {\em Modern quantum chemistry: introduction to advanced electronic
+  structure theory}.
+\newblock Courier Corporation, 2012.
+
+\end{thebibliography}
