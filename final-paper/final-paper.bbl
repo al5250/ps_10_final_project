@@ -1,4 +1,4 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
 
 \bibitem{bartlett1994applications}
 Rodney~J Bartlett and John~F Stanton.
@@ -12,6 +12,37 @@ Lorenz~C Blum and Jean-Louis Reymond.
 \newblock {\em Journal of the American Chemical Society}, 131(25):8732--8733,
   2009.
 
+\bibitem{bunge1993roothaan}
+Carlos~F Bunge, Jose~A Barrientos, and A~Vivier Bunge.
+\newblock Roothaan-hartree-fock ground-state atomic wave functions: Slater-type
+  orbital expansions and expectation values for z= 2-54.
+\newblock {\em Atomic data and nuclear data tables}, 53(1):113--162, 1993.
+
+\bibitem{feller1996}
+David Feller.
+\newblock The role of databases in support of computational chemistry
+  calculations.
+\newblock {\em Journal of computational chemistry}, 17(13):1571--1586, 1996.
+
+\bibitem{helgaker2014molecular}
+Trygve Helgaker, Poul Jorgensen, and Jeppe Olsen.
+\newblock {\em Molecular electronic-structure theory}.
+\newblock John Wiley \& Sons, 2014.
+
+\bibitem{mills2017}
+Kyle Mills, Michael Spanner, and Isaac Tamblyn.
+\newblock Deep learning and the schr{\"o}dinger equation.
+\newblock {\em Physical Review A}, 96(4):042113, 2017.
+
+\bibitem{montavon2012}
+Gr{\'e}goire Montavon, Katja Hansen, Siamac Fazli, Matthias Rupp, Franziska
+  Biegler, Andreas Ziehe, Alexandre Tkatchenko, Anatole~V Lilienfeld, and
+  Klaus-Robert M{\"u}ller.
+\newblock Learning invariant representations of molecules for atomization
+  energy prediction.
+\newblock In {\em Advances in Neural Information Processing Systems}, pages
+  440--448, 2012.
+
 \bibitem{montavon2013}
 Gr{\'e}goire Montavon, Matthias Rupp, Vivekanand Gobre, Alvaro
   Vazquez-Mayagoitia, Katja Hansen, Alexandre Tkatchenko, Klaus-Robert
@@ -19,6 +50,20 @@ Gr{\'e}goire Montavon, Matthias Rupp, Vivekanand Gobre, Alvaro
 \newblock Machine learning of molecular electronic properties in chemical
   compound space.
 \newblock {\em New Journal of Physics}, 15(9):095003, 2013.
+
+\bibitem{rupp2012}
+Matthias Rupp, Alexandre Tkatchenko, Klaus-Robert M{\"u}ller, and O~Anatole
+  Von~Lilienfeld.
+\newblock Fast and accurate modeling of molecular atomization energies with
+  machine learning.
+\newblock {\em Physical review letters}, 108(5):058301, 2012.
+
+\bibitem{schuchardt2007}
+Karen~L Schuchardt, Brett~T Didier, Todd Elsethagen, Lisong Sun, Vidhya
+  Gurumoorthi, Jared Chase, Jun Li, and Theresa~L Windus.
+\newblock Basis set exchange: a community database for computational sciences.
+\newblock {\em Journal of chemical information and modeling}, 47(3):1045--1052,
+  2007.
 
 \bibitem{sherrill2000introduction}
 C~David Sherrill.

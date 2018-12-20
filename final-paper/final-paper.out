@@ -4,3 +4,11 @@
 \BOOKMARK [2][-]{subsection.2.2}{Hartree-Fock Energy}{section.2}% 4
 \BOOKMARK [2][-]{subsection.2.3}{Hartree-Fock Algorithm}{section.2}% 5
 \BOOKMARK [1][-]{section.3}{Implementation}{}% 6
+\BOOKMARK [2][-]{subsection.3.1}{Atomic Basis Set \205 STO-3G}{section.3}% 7
+\BOOKMARK [2][-]{subsection.3.2}{Integration}{section.3}% 8
+\BOOKMARK [2][-]{subsection.3.3}{Code Description}{section.3}% 9
+\BOOKMARK [1][-]{section.4}{Results}{}% 10
+\BOOKMARK [2][-]{subsection.4.1}{Equilibrium Bond Length}{section.4}% 11
+\BOOKMARK [2][-]{subsection.4.2}{Atomic Energy}{section.4}% 12
+\BOOKMARK [2][-]{subsection.4.3}{Analysis of Small Organic Molecules}{section.4}% 13
+\BOOKMARK [1][-]{section.5}{Discussion and Conclusion}{}% 14

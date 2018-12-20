@@ -36,20 +36,84 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Hartree-Fock Energy}{3}{subsection.2.2}}
 \citation{sherrill2000introduction}
 \newlabel{hf-eq}{{16}{4}{Hartree-Fock Energy}{equation.2.16}{}}
+\newlabel{hfr-eq}{{19}{4}{Hartree-Fock Energy}{equation.2.19}{}}
 \citation{szabo2012}
 \citation{szabo2012}
-\bibstyle{plain}
-\bibdata{sources}
-\bibcite{bartlett1994applications}{1}
-\bibcite{blum2009}{2}
+\citation{helgaker2014molecular}
+\citation{feller1996}
+\citation{schuchardt2007}
 \newlabel{overlap}{{20}{5}{Hartree-Fock Energy}{equation.2.20}{}}
 \newlabel{fock}{{21}{5}{Hartree-Fock Energy}{equation.2.21}{}}
 \newlabel{hfr}{{22}{5}{Hartree-Fock Energy}{equation.2.22}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Hartree-Fock Algorithm}{5}{subsection.2.3}}
 \@writefile{toc}{\contentsline {section}{\numberline {3}Implementation}{5}{section.3}}
-\bibcite{montavon2013}{3}
-\bibcite{sherrill2000introduction}{4}
-\bibcite{sherrill2001}{5}
-\bibcite{szabo2012}{6}
 \@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces Restricted Hartree-Fock}}{6}{algorithm.1}}
 \newlabel{alg}{{1}{6}{Hartree-Fock Algorithm}{algorithm.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Atomic Basis Set -- STO-3G}{6}{subsection.3.1}}
+\citation{schuchardt2007}
+\citation{helgaker2014molecular}
+\citation{helgaker2014molecular}
+\citation{montavon2013}
+\citation{szabo2012}
+\citation{bunge1993roothaan}
+\citation{montavon2013}
+\citation{schuchardt2007}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Integration}{7}{subsection.3.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Code Description}{7}{subsection.3.3}}
+\citation{szabo2012}
+\citation{szabo2012}
+\citation{szabo2012}
+\citation{szabo2012}
+\citation{bartlett1994applications}
+\citation{szabo2012}
+\citation{bartlett1994applications}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Results}{8}{section.4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Equilibrium Bond Length}{8}{subsection.4.1}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Total energy curves as a function of internuclear distance for diatomic molecules FH (left) and N$_2$ (right). The dotted green line denotes the minimum of the blue curve, which was computed from first principles via Hartree-Fock. The dotted red line denotes the true equilibrium bond length as found in experimental settings \cite  {szabo2012}. The errors are less than 10\% for both molecules.}}{8}{figure.1}}
+\newlabel{bond-len}{{1}{8}{Total energy curves as a function of internuclear distance for diatomic molecules FH (left) and N$_2$ (right). The dotted green line denotes the minimum of the blue curve, which was computed from first principles via Hartree-Fock. The dotted red line denotes the true equilibrium bond length as found in experimental settings \cite {szabo2012}. The errors are less than 10\% for both molecules}{figure.1}{}}
+\citation{szabo2012}
+\citation{bunge1993roothaan}
+\citation{bunge1993roothaan}
+\citation{bunge1993roothaan}
+\citation{montavon2013}
+\citation{montavon2013}
+\citation{montavon2013}
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Equilibrium bond length results derived using the Hartree-Fock algorithm for different basis sets. All values are recorded in bohrs and taken from \cite  {szabo2012}. The results are not completely consistent with experimental data because of Hartree-Fock's inability to capture electron correlation effects \cite  {bartlett1994applications}.}}{9}{table.1}}
+\newlabel{bond-len-table}{{1}{9}{Equilibrium bond length results derived using the Hartree-Fock algorithm for different basis sets. All values are recorded in bohrs and taken from \cite {szabo2012}. The results are not completely consistent with experimental data because of Hartree-Fock's inability to capture electron correlation effects \cite {bartlett1994applications}}{table.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Atomic Energy}{9}{subsection.4.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Analysis of Small Organic Molecules}{9}{subsection.4.3}}
+\citation{szabo2012}
+\citation{montavon2013}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces A comparison of values calculated by a scheme based on Algorithm \ref  {alg} and values taken from an essentially exact source \cite  {bunge1993roothaan} for the total energy of a multi-electron atom (left). The difference between the exact value and the calculated value seems to increase as the number of electrons increases, which is intuitive (right).}}{10}{figure.2}}
+\newlabel{atom-energy}{{2}{10}{A comparison of values calculated by a scheme based on Algorithm \ref {alg} and values taken from an essentially exact source \cite {bunge1993roothaan} for the total energy of a multi-electron atom (left). The difference between the exact value and the calculated value seems to increase as the number of electrons increases, which is intuitive (right)}{figure.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces A comparison of total energy values calculated by a scheme based on Algorithm \ref  {alg} and values taken from an essentially exact source \cite  {montavon2013} (left). The dotted lines denote the delineations between 1 non-hydrogen, 2 non-hydrogen, 3 non-hydrogen, and 4 non-hydrogen structures. As expected, the error increases as the complexity of the system increases (right). Calculations for organic molecule \#54 failed to converge.}}{10}{figure.3}}
+\newlabel{org-tot-energy}{{3}{10}{A comparison of total energy values calculated by a scheme based on Algorithm \ref {alg} and values taken from an essentially exact source \cite {montavon2013} (left). The dotted lines denote the delineations between 1 non-hydrogen, 2 non-hydrogen, 3 non-hydrogen, and 4 non-hydrogen structures. As expected, the error increases as the complexity of the system increases (right). Calculations for organic molecule \#54 failed to converge}{figure.3}{}}
+\citation{montavon2013}
+\citation{montavon2013}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces The absolute error in first ionization potentials for different small organic molecules. Ground truth is taken as density functional theory values reported in \cite  {montavon2013}. Again, the one outlier is a result of a failure of the algorithm to converge.}}{11}{figure.4}}
+\newlabel{ionize-energy}{{4}{11}{The absolute error in first ionization potentials for different small organic molecules. Ground truth is taken as density functional theory values reported in \cite {montavon2013}. Again, the one outlier is a result of a failure of the algorithm to converge}{figure.4}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Ionization energy calculations across different organic families -- alkanes (left) and alkynes (right). The correct trends are maintained by the Hartree-Fock algorithm.}}{11}{figure.5}}
+\newlabel{ionize-fams}{{5}{11}{Ionization energy calculations across different organic families -- alkanes (left) and alkynes (right). The correct trends are maintained by the Hartree-Fock algorithm}{figure.5}{}}
+\citation{bartlett1994applications}
+\citation{montavon2012}
+\citation{montavon2013}
+\citation{rupp2012}
+\citation{mills2017}
+\bibstyle{plain}
+\bibdata{sources}
+\bibcite{bartlett1994applications}{1}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Fitting different polynomial curves to the running time of the algorithm versus number of atomic orbitals. From this is analysis, it is clear that $\mathcal  {O}(K^4)$ fits the best.}}{12}{figure.6}}
+\newlabel{run-time}{{6}{12}{Fitting different polynomial curves to the running time of the algorithm versus number of atomic orbitals. From this is analysis, it is clear that $\Oh (K^4)$ fits the best}{figure.6}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Discussion and Conclusion}{12}{section.5}}
+\bibcite{blum2009}{2}
+\bibcite{bunge1993roothaan}{3}
+\bibcite{feller1996}{4}
+\bibcite{helgaker2014molecular}{5}
+\bibcite{mills2017}{6}
+\bibcite{montavon2012}{7}
+\bibcite{montavon2013}{8}
+\bibcite{rupp2012}{9}
+\bibcite{schuchardt2007}{10}
+\bibcite{sherrill2000introduction}{11}
+\bibcite{sherrill2001}{12}
+\bibcite{szabo2012}{13}

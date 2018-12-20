@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  16 DEC 2018 22:49
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  19 DEC 2018 23:17
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -140,20 +140,48 @@ Document Style algorithmicx 1.2 - a greatly improved `algorithmic' style
 \c@ALG@storecount=\count107
 \c@ALG@tmpcounter=\count108
 \ALG@tmplength=\skip48
-) (/usr/local/texlive/2015/texmf-dist/tex/latex/algorithms/algorithm.sty
+) (/usr/local/texlive/2015/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2014/10/28 v1.0g Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/local/texlive/2015/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2014/10/28 v1.0p Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/local/texlive/2015/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
+)
+(/usr/local/texlive/2015/texmf-dist/tex/latex/latexconfig/graphics.cfg
+File: graphics.cfg 2010/04/23 v1.9 graphics configuration of TeX Live
+)
+Package graphics Info: Driver file: pdftex.def on input line 94.
+
+(/usr/local/texlive/2015/texmf-dist/tex/latex/pdftex-def/pdftex.def
+File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
+
+(/usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/infwarerr.sty
+Package: infwarerr 2010/04/08 v1.3 Providing info/warning/error messages (HO)
+)
+(/usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
+Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
+)
+\Gread@gobject=\count109
+))
+\Gin@req@height=\dimen120
+\Gin@req@width=\dimen121
+)
+(/usr/local/texlive/2015/texmf-dist/tex/latex/algorithms/algorithm.sty
 Package: algorithm 2009/08/24 v0.1 Document Style `algorithm' - floating enviro
 nment
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/float/float.sty
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
-\c@float@type=\count109
+\c@float@type=\count110
 \float@exts=\toks21
 \float@box=\box28
 \@float@everytoks=\toks22
 \@floatcapt=\box29
 )
 \@float@every@algorithm=\toks23
-\c@algorithm=\count110
+\c@algorithm=\count111
 )
 (/usr/local/texlive/2015/texmf-dist/tex/latex/algorithmicx/algpseudocode.sty
 Package: algpseudocode 
@@ -169,8 +197,8 @@ Package: hobsub-hyperref 2012/05/28 v1.13 Bundle oberdiek, subset hyperref (HO)
 (/usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/hobsub-generic.sty
 Package: hobsub-generic 2012/05/28 v1.13 Bundle oberdiek, subset generic (HO)
 Package: hobsub 2012/05/28 v1.13 Construct package bundles (HO)
-Package: infwarerr 2010/04/08 v1.3 Providing info/warning/error messages (HO)
-Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
+Package hobsub Info: Skipping package `infwarerr' (already loaded).
+Package hobsub Info: Skipping package `ltxcmds' (already loaded).
 Package: ifluatex 2010/03/01 v1.3 Provides the ifluatex switch (HO)
 Package ifluatex Info: LuaTeX not detected.
 Package hobsub Info: Skipping package `ifvtex' (already loaded).
@@ -211,14 +239,14 @@ Package: auxhook 2011/03/04 v1.3 Hooks for auxiliary files (HO)
 (/usr/local/texlive/2015/texmf-dist/tex/latex/oberdiek/kvoptions.sty
 Package: kvoptions 2011/06/30 v3.11 Key value format for package options (HO)
 )
-\@linkdim=\dimen120
-\Hy@linkcounter=\count111
-\Hy@pagecounter=\count112
+\@linkdim=\dimen122
+\Hy@linkcounter=\count112
+\Hy@pagecounter=\count113
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/hyperref/pd1enc.def
 File: pd1enc.def 2012/11/06 v6.83m Hyperref: PDFDocEncoding definition (HO)
 )
-\Hy@SavedSpaceFactor=\count113
+\Hy@SavedSpaceFactor=\count114
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/latexconfig/hyperref.cfg
 File: hyperref.cfg 2002/06/06 v1.2 hyperref configuration of TeXLive
@@ -231,17 +259,17 @@ Package hyperref Info: Plain pages OFF on input line 4458.
 Package hyperref Info: Backreferencing OFF on input line 4463.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
 Package hyperref Info: Bookmarks ON on input line 4688.
-\c@Hy@tempcnt=\count114
+\c@Hy@tempcnt=\count115
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/url/url.sty
 \Urlmuskip=\muskip11
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
 LaTeX Info: Redefining \url on input line 5041.
-\XeTeXLinkMargin=\dimen121
-\Fld@menulength=\count115
-\Field@Width=\dimen122
-\Fld@charsize=\dimen123
+\XeTeXLinkMargin=\dimen123
+\Fld@menulength=\count116
+\Field@Width=\dimen124
+\Fld@charsize=\dimen125
 Package hyperref Info: Hyper figures OFF on input line 6295.
 Package hyperref Info: Link nesting OFF on input line 6300.
 Package hyperref Info: Hyper index ON on input line 6303.
@@ -251,17 +279,17 @@ Package hyperref Info: Link coloring with OCG OFF on input line 6320.
 Package hyperref Info: PDF/A mode OFF on input line 6325.
 LaTeX Info: Redefining \ref on input line 6365.
 LaTeX Info: Redefining \pageref on input line 6369.
-\Hy@abspage=\count116
-\c@Item=\count117
-\c@Hfootnote=\count118
+\Hy@abspage=\count117
+\c@Item=\count118
+\c@Hfootnote=\count119
 )
 
 Package hyperref Message: Driver (autodetected): hpdftex.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/hyperref/hpdftex.def
 File: hpdftex.def 2012/11/06 v6.83m Hyperref driver for pdfTeX
-\Fld@listcount=\count119
-\c@bookmark@seq@number=\count120
+\Fld@listcount=\count120
+\c@bookmark@seq@number=\count121
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/oberdiek/rerunfilecheck.sty
 Package: rerunfilecheck 2011/04/15 v1.7 Rerun checks for auxiliary files (HO)
@@ -273,20 +301,20 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 (./final-paper.aux)
 \openout1 = `final-paper.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -322,7 +350,36 @@ LaTeX Font Info:    ... okay on input line 16.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-\AtBeginShipoutBox=\box30
+(/usr/local/texlive/2015/texmf-dist/tex/context/base/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count122
+\scratchdimen=\dimen126
+\scratchbox=\box30
+\nofMPsegments=\count123
+\nofMParguments=\count124
+\everyMPshowfont=\toks24
+\MPscratchCnt=\count125
+\MPscratchDim=\dimen127
+\MPnumerator=\count126
+\makeMPintoPDFobject=\count127
+\everyMPtoPDFconversion=\toks25
+) (/usr/local/texlive/2015/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
+Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
+
+(/usr/local/texlive/2015/texmf-dist/tex/latex/oberdiek/grfext.sty
+Package: grfext 2010/08/19 v1.1 Manage graphics extensions (HO)
+)
+Package grfext Info: Graphics extension search list:
+(grfext)             [.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPE
+G,.JBIG2,.JB2,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 452.
+
+(/usr/local/texlive/2015/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
+))
+\AtBeginShipoutBox=\box31
+
 (/usr/local/texlive/2015/texmf-dist/tex/latex/graphics/color.sty
 Package: color 2014/10/28 v1.1a Standard LaTeX Color (DPC)
 
@@ -330,27 +387,10 @@ Package: color 2014/10/28 v1.1a Standard LaTeX Color (DPC)
 File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
 )
 Package color Info: Driver file: pdftex.def on input line 142.
+)
+Package hyperref Info: Link coloring ON on input line 17.
 
-(/usr/local/texlive/2015/texmf-dist/tex/latex/pdftex-def/pdftex.def
-File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
-\Gread@gobject=\count121
-
-(/usr/local/texlive/2015/texmf-dist/tex/context/base/supp-pdf.mkii
-[Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count122
-\scratchdimen=\dimen124
-\scratchbox=\box31
-\nofMPsegments=\count123
-\nofMParguments=\count124
-\everyMPshowfont=\toks24
-\MPscratchCnt=\count125
-\MPscratchDim=\dimen125
-\MPnumerator=\count126
-\makeMPintoPDFobject=\count127
-\everyMPtoPDFconversion=\toks25
-)))
-Package hyperref Info: Link coloring ON on input line 16.
- (/usr/local/texlive/2015/texmf-dist/tex/latex/hyperref/nameref.sty
+(/usr/local/texlive/2015/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
 
 (/usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
@@ -358,20 +398,20 @@ Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
 \c@section@level=\count128
 )
-LaTeX Info: Redefining \ref on input line 16.
-LaTeX Info: Redefining \pageref on input line 16.
-LaTeX Info: Redefining \nameref on input line 16.
+LaTeX Info: Redefining \ref on input line 17.
+LaTeX Info: Redefining \pageref on input line 17.
+LaTeX Info: Redefining \nameref on input line 17.
 
 (./final-paper.out) (./final-paper.out)
 \@outlinefile=\write3
 \openout3 = `final-paper.out'.
 
-LaTeX Font Info:    Try loading font information for U+msa on input line 22.
+LaTeX Font Info:    Try loading font information for U+msa on input line 23.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 22.
+LaTeX Font Info:    Try loading font information for U+msb on input line 23.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -381,31 +421,116 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
  [4]
 
 Package amsfonts Warning: Obsolete command \bold; \mathbf should be used instea
-d on input line 166.
+d on input line 167.
 
 Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
-put line 168.
-(./final-paper.bbl
+put line 169.
+[5] [6]
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 205.
+
+ (/usr/local/texlive/2015/texmf-dist/tex/latex/base/omscmr.fd
+File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 205.
+ [7]
+<img/bond-len-fh.png, id=202, 536.0025pt x 409.53pt>
+File: img/bond-len-fh.png Graphic file (type png)
+ <use img/bond-len-fh.png>
+Package pdftex.def Info: img/bond-len-fh.png used on input line 220.
+(pdftex.def)             Requested size: 214.3972pt x 163.80908pt.
+
+<img/bond-len-n2.png, id=204, 545.03625pt x 411.5375pt>
+File: img/bond-len-n2.png Graphic file (type png)
+
+<use img/bond-len-n2.png>
+Package pdftex.def Info: img/bond-len-n2.png used on input line 221.
+(pdftex.def)             Requested size: 218.01064pt x 164.61208pt.
+ [8 <./img/bond-len-fh.png> <./img/bond-len-n2.png>]
+<img/atom-energy1.png, id=228, 530.98375pt x 389.455pt>
+File: img/atom-energy1.png Graphic file (type png)
+
+<use img/atom-energy1.png>
+Package pdftex.def Info: img/atom-energy1.png used on input line 265.
+(pdftex.def)             Requested size: 212.38972pt x 155.77924pt.
+
+<img/atom-energy2.png, id=229, 507.8975pt x 395.4775pt>
+File: img/atom-energy2.png Graphic file (type png)
+
+<use img/atom-energy2.png>
+Package pdftex.def Info: img/atom-energy2.png used on input line 266.
+(pdftex.def)             Requested size: 203.1554pt x 158.18819pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<img/org-tot-energy1.png, id=237, 561.09625pt x 390.45876pt>
+File: img/org-tot-energy1.png Graphic file (type png)
+
+<use img/org-tot-energy1.png>
+Package pdftex.def Info: img/org-tot-energy1.png used on input line 279.
+(pdftex.def)             Requested size: 224.43452pt x 156.18073pt.
+
+<img/org-tot-energy2.png, id=238, 542.025pt x 389.455pt>
+File: img/org-tot-energy2.png Graphic file (type png)
+
+<use img/org-tot-energy2.png>
+Package pdftex.def Info: img/org-tot-energy2.png used on input line 280.
+(pdftex.def)             Requested size: 216.80615pt x 155.77924pt.
+ [9] [10 <./img/atom-energy1.png> <./img/atom-energy2.png> <./img/org-tot-energ
+y1.png> <./img/org-tot-energy2.png>]
+<img/ionize-energy.png, id=265, 515.9275pt x 389.455pt>
+File: img/ionize-energy.png Graphic file (type png)
+
+<use img/ionize-energy.png>
+Package pdftex.def Info: img/ionize-energy.png used on input line 291.
+(pdftex.def)             Requested size: 257.96312pt x 194.72702pt.
+ <img/alkanes.png, id=268, 527.9725pt x 369.38pt>
+File: img/alkanes.png Graphic file (type png)
+
+<use img/alkanes.png>
+Package pdftex.def Info: img/alkanes.png used on input line 298.
+(pdftex.def)             Requested size: 211.18526pt x 147.74937pt.
+ <img/alkynes.png, id=269, 523.9575pt x 367.3725pt>
+File: img/alkynes.png Graphic file (type png)
+
+<use img/alkynes.png>
+Package pdftex.def Info: img/alkynes.png used on input line 299.
+(pdftex.def)             Requested size: 209.57928pt x 146.94638pt.
+ <img/run-time.png, id=270, 540.0175pt x 395.4775pt>
+File: img/run-time.png Graphic file (type png)
+
+<use img/run-time.png>
+Package pdftex.def Info: img/run-time.png used on input line 306.
+(pdftex.def)             Requested size: 270.00809pt x 197.73827pt.
+ [11 <./img/ionize-energy.png> <./img/alkanes.png> <./img/alkynes.png>] (./fina
+l-paper.bbl
 Missing character: There is no â in font cmr12!
 Missing character: There is no € in font cmr12!
 Missing character: There is no ” in font cmr12!
- [5])
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 179.
- [6]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 179.
+ [12 <./img/run-time.png>]
+Underfull \hbox (badness 2142) in paragraph at lines 55--60
+[]\OT1/cmr/m/n/12 Matthias Rupp, Alexan-dre Tkatchenko, Klaus-Robert M^^?uller,
+ and O Ana-tole
+ []
+
+)
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 322.
+ [13]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 322.
  (./final-paper.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 179.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 179.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 322.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 322.
 Package rerunfilecheck Info: File `final-paper.out' has not changed.
-(rerunfilecheck)             Checksum: F527C8639BE88811A8926ED5B74A6DED;347.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 179.
+(rerunfilecheck)             Checksum: 1F57150779FF3F5B09D0C3B96C78D09B;874.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 322.
  ) 
 Here is how much of TeX's memory you used:
- 6847 strings out of 493089
- 98095 string characters out of 6134842
- 199318 words of memory out of 5000000
- 10218 multiletter control sequences out of 15000+600000
- 16025 words of font info for 61 fonts, out of 8000000 for 9000
+ 7265 strings out of 493089
+ 105042 string characters out of 6134842
+ 208229 words of memory out of 5000000
+ 10553 multiletter control sequences out of 15000+600000
+ 17121 words of font info for 65 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  29i,18n,32p,1194b,433s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmbsy
@@ -425,11 +550,12 @@ ive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texli
 ve/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive
 /2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/
 2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2
-015/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on final-paper.pdf (6 pages, 207569 bytes).
+015/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/local/texlive/20
+15/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on final-paper.pdf (13 pages, 499808 bytes).
 PDF statistics:
- 203 PDF objects out of 1000 (max. 8388607)
- 175 compressed objects within 2 object streams
- 47 named destinations out of 1000 (max. 500000)
- 49 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 380 PDF objects out of 1000 (max. 8388607)
+ 314 compressed objects within 4 object streams
+ 84 named destinations out of 1000 (max. 500000)
+ 163 words of extra memory for PDF output out of 10000 (max. 10000000)
 
